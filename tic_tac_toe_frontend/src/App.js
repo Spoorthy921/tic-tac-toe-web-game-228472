@@ -121,7 +121,6 @@ function App() {
                     .join(" ")}
                   onClick={() => handleSquareClick(idx)}
                   onKeyDown={(e) => handleKeyDownOnSquare(e, idx)}
-                  role="gridcell"
                   aria-label={`Square ${idx + 1}${value ? `: ${value}` : ""}`}
                   aria-disabled={isDisabled ? "true" : "false"}
                 >
