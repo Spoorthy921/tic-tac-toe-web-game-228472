@@ -134,7 +134,7 @@ function App() {
               <div className="ttt-coverMedia">
                 <img
                   className="ttt-coverImg"
-                  src="/assets/cat.jpg"
+                  src={`${process.env.PUBLIC_URL}/assets/cat.jpg`}
                   alt="Cover image"
                   loading="eager"
                 />
