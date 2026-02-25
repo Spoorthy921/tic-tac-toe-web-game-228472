@@ -13,8 +13,19 @@ function getStatus() {
 }
 
 describe("Tic-Tac-Toe core gameplay", () => {
-  test("renders board, initial status, and reset control", () => {
+  test("renders cover first", () => {
     render(<App />);
+
+    expect(screen.getByRole("heading", { name: /tic-tac-toe/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^play$/i })).toBeInTheDocument();
+    expect(screen.queryByRole("grid", { name: /tic-tac-toe board/i })).not.toBeInTheDocument();
+  });
+
+  test("renders board, initial status, and reset control after starting", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /^play$/i }));
 
     expect(screen.getByRole("heading", { name: /tic-tac-toe/i })).toBeInTheDocument();
     expect(screen.getByRole("grid", { name: /tic-tac-toe board/i })).toBeInTheDocument();
@@ -28,14 +39,14 @@ describe("Tic-Tac-Toe core gameplay", () => {
     }
 
     expect(getStatus()).toHaveTextContent("Next player: X");
-    expect(
-      screen.getByRole("button", { name: /new game \/ reset/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /new game \/ reset/i })).toBeInTheDocument();
   });
 
   test("players alternate turns and status updates after each move", async () => {
     const user = userEvent.setup();
     render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /^play$/i }));
 
     await user.click(getSquare(1));
     expect(getSquare(1)).toHaveTextContent("X");
@@ -52,6 +63,8 @@ describe("Tic-Tac-Toe core gameplay", () => {
     const user = userEvent.setup();
     render(<App />);
 
+    await user.click(screen.getByRole("button", { name: /^play$/i }));
+
     await user.click(getSquare(1));
     expect(getStatus()).toHaveTextContent("Next player: O");
 
@@ -64,6 +77,8 @@ describe("Tic-Tac-Toe core gameplay", () => {
   test("detects a win, highlights winning squares, and disables further moves", async () => {
     const user = userEvent.setup();
     render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /^play$/i }));
 
     // X wins on top row: squares 1,2,3
     await user.click(getSquare(1)); // X
@@ -93,6 +108,8 @@ describe("Tic-Tac-Toe core gameplay", () => {
     const user = userEvent.setup();
     render(<App />);
 
+    await user.click(screen.getByRole("button", { name: /^play$/i }));
+
     /**
      * Fill board with a known draw pattern:
      * X O X
@@ -117,6 +134,8 @@ describe("Tic-Tac-Toe core gameplay", () => {
   test("reset clears the board and restores X as the next player", async () => {
     const user = userEvent.setup();
     render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /^play$/i }));
 
     await user.click(getSquare(1));
     await user.click(getSquare(2));

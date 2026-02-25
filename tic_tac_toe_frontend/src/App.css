@@ -254,6 +254,85 @@
   color: var(--muted);
 }
 
+/* Cover screen */
+.ttt-coverWrap {
+  width: min(720px, 94vw);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(233, 241, 255, 0.14);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow:
+    0 20px 60px var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.ttt-coverMedia {
+  border-radius: calc(var(--radius) - 6px);
+  border: 1px solid rgba(233, 241, 255, 0.12);
+  overflow: hidden;
+  position: relative;
+  background: rgba(0, 0, 0, 0.25);
+  aspect-ratio: 16 / 9;
+}
+
+.ttt-coverImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.ttt-coverOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: end;
+  padding: 18px;
+  background:
+    radial-gradient(900px 260px at 15% 120%, rgba(41, 240, 255, 0.28), transparent 55%),
+    radial-gradient(900px 260px at 90% 115%, rgba(255, 59, 212, 0.22), transparent 52%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 20%, rgba(0, 0, 0, 0.70) 100%);
+}
+
+.ttt-coverTitle {
+  margin: 0;
+  font-size: clamp(26px, 4.2vw, 44px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-shadow:
+    0 0 18px rgba(41, 240, 255, 0.14),
+    0 0 28px rgba(255, 59, 212, 0.08);
+}
+
+.ttt-coverSubtitle {
+  margin: 8px 0 0;
+  max-width: 52ch;
+  color: rgba(233, 241, 255, 0.85);
+  font-size: 13px;
+}
+
+.ttt-coverActions {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.ttt-btnGhost {
+  border-color: rgba(233, 241, 255, 0.18);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.ttt-coverHint {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 @media (max-width: 420px) {
   .ttt-boardWrap {
     padding: 14px;
@@ -266,5 +345,17 @@
 
   .ttt-square {
     min-height: 84px;
+  }
+
+  .ttt-coverMedia {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ttt-coverActions {
+    justify-content: center;
+  }
+
+  .ttt-coverSubtitle {
+    max-width: 60ch;
   }
 }
